@@ -7,7 +7,8 @@ import { RecipeModel } from '../admin/model/recipeModel';
 })
 export class ApiService {
 
-  server_url = "http://localhost:3000"
+  // server_url = "http://localhost:3000"
+  server_url = "https://cookpedia-server-kzba.onrender.com"
   constructor(private http:HttpClient) { }
   getAllRecipeAPI(){
     return this.http.get(`${this.server_url}/all-recipes`)
