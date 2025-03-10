@@ -1,0 +1,36 @@
+<div class="container float-center my-5">
+    <div class="container-fluid my-5">
+        <div class="d-flex justify-content-evenly align-items-center">
+            <div class="border shadow rounded p-3 w-25">
+                <form [formGroup]="registerForm" (ngSubmit)="register()">
+                    <h2 class="mb-3 fw-bolder"><i class="fa-solid fa-graduation-cap text-success me-1"></i>Cookpedia</h2>
+                    <div class="mb-3"><input name="username" formControlName="username" class="form-control rounded" type="text" placeholder="Username" ></div>
+                    @if (registerForm.get('username')?.errors && registerForm.get('username')?.touched) {
+                        <div class="text-danger fw-bolder mb-3">*Invalid Username*</div>
+                    }
+                    <div class="mb-3"><input name="email" formControlName="email" class="form-control rounded" type="text" placeholder="Email" ></div>
+                    @if (registerForm.get('email')?.errors && registerForm.get('email')?.touched) {
+                        <div class="text-danger fw-bolder mb-3">*Invalid Email*</div>
+                    }
+                    <div class="mb-3"><input name="password" formControlName="password" class="form-control rounded" type="password" placeholder="Password" ></div>
+                    @if (registerForm.get('password')?.errors && registerForm.get('password')?.touched) {
+                        <div class="text-danger fw-bolder mb-3">*Invalid Password*</div>
+                    }
+                    <div><button type="submit" class="btn btn-success w-100">Register</button></div>
+                </form>
+            </div>
+            <div class="text-justify">
+                <h3 class="fw-bolder">Create New <br> Account</h3>
+                <h5 class="fw-bolder text-secondary">What you will get?</h5>
+                <ul class="fw-bolder text-secondary">
+                    <li>Different Recipes</li>
+                    <li>Easy way to Make Recipe</li>
+                    <li>Save your Favourite Recipes</li>
+                    <li>Download your Recipes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

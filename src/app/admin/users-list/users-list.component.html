@@ -1,0 +1,31 @@
+<div class="row w-100">
+    <div class="col-lg-2 bg-success">
+        <app-sidebar></app-sidebar>
+
+    </div>
+    <div class="col-lg-10">
+        <h1>AllUser List</h1>
+        <table class="table my-5 shadow">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>E-Mail</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @for (user of allUsers; track $index;let i=$index) {
+                    <tr>
+                        <th>{{i+1}}</th>
+                        <th>{{user.username}}</th>
+                        <th>{{user.email}}</th>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

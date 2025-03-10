@@ -1,0 +1,45 @@
+<div class="row w-100">
+    <div class="col-lg-2 bg-success">
+        <app-sidebar></app-sidebar>
+
+    </div>
+    <div class="col-lg-10">
+       <h1 class="text-center text-warning my-4">All Recipe List</h1>
+       <div class="d-flex justify-content-between">
+        <button routerLink="/admin/recipe/add" class="btn btn-primary">+ Add New Recipe</button>
+        <input [(ngModel)]="searchRecipe" type="text" placeholder="Search recipe by Name" class="form-control w-25">
+       </div>
+       <table class="table my-5 shadow">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Image</td>
+                <td>Cusisine</td>
+                <td>...</td>
+            </tr>
+        </thead>
+        <tbody>
+            @for (recipe of allRecipes | search:searchRecipe; track $index; let i =$index) {
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{recipe.name}}</td>
+                    <td><img width="70px" height="70px" [src]="recipe.image" alt=""></td>
+                    <td>{{recipe.cuisine}}</td>
+                    <td><button routerLink="/admin/recipe/{{recipe._id}}/edit" class="btn me-1"><i class="fa-solid fa-edit text-primary"></i></button>
+                    <button (click)="deleteRecipe(recipe._id)" class="btn me-1"><i class="fa-solid fa-trash text-danger"></i></button>
+                </td>
+                </tr>
+            }
+            @if ((allRecipes | search:searchRecipe).length==0 ){
+                <tr class="text-danger fw-bolder fs-3">
+                    Recipes Not Found!!
+                </tr>
+            }
+        </tbody>
+
+       </table>
+
+    </div>
+
+</div>
