@@ -1,31 +1,66 @@
-<div class="row w-100">
-    <div class="col-lg-2 bg-success">
-        <app-sidebar></app-sidebar>
+<mat-sidenav-container class="admin-container">
+  <mat-sidenav mode="side" [opened]="true" class="admin-sidenav shadow">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
 
-    </div>
-    <div class="col-lg-10">
-        <h1>AllUser List</h1>
-        <table class="table my-5 shadow">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>E-Mail</th>
+  <mat-sidenav-content>
+    <mat-toolbar class="top-toolbar border-bottom bg-white">
+      <span class="ms-2 fw-bold">Manage Users</span>
+    </mat-toolbar>
+
+    <div class="page-content p-4">
+      <mat-card class="shadow-sm border-0">
+        <mat-card-header class="mb-3 d-flex justify-content-between align-items-center">
+          <mat-card-title class="fw-bold">All Users List</mat-card-title>
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Search users...</mat-label>
+            <input matInput [(ngModel)]="searchKey" placeholder="Ex. John Doe">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead>
+                <tr class="table-light">
+                  <th class="ps-3">#</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Joined Date</th>
                 </tr>
-
-            </thead>
-            <tbody>
-                @for (user of allUsers; track $index;let i=$index) {
-                    <tr>
-                        <th>{{i+1}}</th>
-                        <th>{{user.username}}</th>
-                        <th>{{user.email}}</th>
-                    </tr>
+              </thead>
+              <tbody>
+                @for (user of allUsers | search:searchKey | paginate: { itemsPerPage: 10, currentPage: p }; track $index; let i = $index) {
+                  <tr>
+                    <td class="ps-3 fw-bold">{{ (p - 1) * 10 + i + 1 }}</td>
+                    <td class="fw-medium">
+                      <div class="d-flex align-items-center">
+                        <div class="user-avatar bg-primary-subtle text-primary me-2">{{user.username.charAt(0).toUpperCase()}}</div>
+                        {{user.username}}
+                      </div>
+                    </td>
+                    <td>{{user.email}}</td>
+                    <td class="text-muted">{{user.createdAt | date:'mediumDate'}}</td>
+                  </tr>
                 }
-            </tbody>
-
-        </table>
-
+                @if ((allUsers | search:searchKey).length === 0) {
+                  <tr>
+                    <td colspan="4" class="text-center py-5">
+                      <mat-icon class="display-4 text-muted mb-3">person_off</mat-icon>
+                      <h3 class="text-muted">No Users Found</h3>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="pagination-container d-flex justify-content-center mt-4">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
-
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

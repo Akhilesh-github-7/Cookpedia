@@ -47,7 +47,7 @@
         <h1 class="recipe-title mb-4">{{ recipe.name }}</h1>
         
         <!-- Stats Row -->
-        <div class="stats-container p-4 rounded-4 bg-white shadow-sm mb-5 d-flex justify-content-around text-center">
+        <div class="stats-container p-4 rounded-4 bg-white shadow-sm mb-5 d-flex flex-wrap justify-content-around text-center gap-3">
           <div class="stat-item">
             <div class="stat-icon-bg prep">
               <mat-icon>timer</mat-icon>
@@ -55,7 +55,7 @@
             <p class="stat-label mb-0">Prep Time</p>
             <h5 class="stat-value">{{recipe.prepTimeMinutes}} min</h5>
           </div>
-          <mat-divider vertical></mat-divider>
+          <mat-divider vertical class="d-none d-md-block"></mat-divider>
           <div class="stat-item">
             <div class="stat-icon-bg cook">
               <mat-icon>outdoor_grill</mat-icon>
@@ -63,7 +63,7 @@
             <p class="stat-label mb-0">Cook Time</p>
             <h5 class="stat-value">{{recipe.cookTimeMinutes}} min</h5>
           </div>
-          <mat-divider vertical></mat-divider>
+          <mat-divider vertical class="d-none d-md-block"></mat-divider>
           <div class="stat-item">
             <div class="stat-icon-bg calories">
               <mat-icon>local_fire_department</mat-icon>

@@ -1,8 +1,35 @@
-<div style="min-height: 100vh; width: fit-content;" class="bg-success text-light p-2 d-flex flex-column align-items-center">
-    <h5 class="mb-5 ms-3 text-warning border rounded p-4 shadow "><i class="fa-solid fa-graduation-cap"></i>Cookpedia</h5>
-    <a routerLink="/admin" class="text-decoration-none text-light fw-bolder mb-4"><i class="fa-solid fa-chart-simple me-2"></i>Dashboard</a>
-    <a routerLink="/admin/recipe-list" class="text-decoration-none text-light fw-bolder mb-4"><i class="fa-solid fa-bowl-food me-2"></i>Recipe List</a>
-    <a routerLink="/admin/user-list" class=" text-decoration-none text-light fw-bolder mb-4"><i class="fa-solid fa-users me-2"></i>User List</a>
-    <a routerLink="/admin/download-list" class="text-decoration-none text-light fw-bolder mb-4"><i class="fa-solid fa-download me-2"></i>Download List</a>
-    <a routerLink="/admin/request-list" class="text-decoration-none text-light fw-bolder mb-4"><i class="fa-solid fa-message me-2"></i>Request List</a>
+<div class="sidebar-container">
+  <div class="brand-section">
+    <mat-icon class="brand-icon">school</mat-icon>
+    <span class="brand-name">Cookpedia Admin</span>
+  </div>
+  
+  <mat-divider class="mb-3"></mat-divider>
+
+  <mat-nav-list>
+    <a mat-list-item routerLink="/admin" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon matListItemIcon>dashboard</mat-icon>
+      <span matListItemTitle>Dashboard</span>
+    </a>
+    
+    <a mat-list-item routerLink="/admin/recipe-list" routerLinkActive="active-item">
+      <mat-icon matListItemIcon>restaurant_menu</mat-icon>
+      <span matListItemTitle>Recipe List</span>
+    </a>
+    
+    <a mat-list-item routerLink="/admin/user-list" routerLinkActive="active-item">
+      <mat-icon matListItemIcon>group</mat-icon>
+      <span matListItemTitle>User List</span>
+    </a>
+    
+    <a mat-list-item routerLink="/admin/download-list" routerLinkActive="active-item">
+      <mat-icon matListItemIcon>cloud_download</mat-icon>
+      <span matListItemTitle>Download List</span>
+    </a>
+    
+    <a mat-list-item routerLink="/admin/request-list" routerLinkActive="active-item">
+      <mat-icon matListItemIcon>feedback</mat-icon>
+      <span matListItemTitle>Request List</span>
+    </a>
+  </mat-nav-list>
 </div>

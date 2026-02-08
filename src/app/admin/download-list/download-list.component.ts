@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -7,21 +7,21 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './download-list.component.html',
   styleUrl: './download-list.component.css'
 })
-export class DownloadListComponent {
+export class DownloadListComponent implements OnInit {
 
-  allDownloads:any=[]
-  constructor(private api:ApiService){}
+  allDownloads: any = []
+  searchKey: string = ""
+  p: number = 1
 
-  ngOnInit(){
+  constructor(private api: ApiService) { }
+
+  ngOnInit() {
     this.getAllDownloadList()
   }
 
-  getAllDownloadList(){
-    this.api.allDownloadApi().subscribe((res:any)=>{
-      this.allDownloads=res
-      console.log(this.allDownloads);
-      
+  getAllDownloadList() {
+    this.api.allDownloadApi().subscribe((res: any) => {
+      this.allDownloads = res
     })
   }
-
 }

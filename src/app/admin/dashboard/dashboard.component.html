@@ -1,84 +1,127 @@
-<div class="row w-100">
-   @if (isSidebarOpen) {
-    <div class="col-lg-2 bg-success">
-        <app-sidebar></app-sidebar>
+<mat-sidenav-container class="dashboard-container" autosize>
+  <!-- Sidenav -->
+  <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="isSidebarOpen" class="admin-sidenav shadow">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
 
-    </div>
-   }
-    <div [class]="columnWidth">
-        <!-- NavBar -->
-         <div class="row bg-warning text-light p-3">
-            <div class="d-flex justify-content-between align-items-center">
-                <h1><button (click)="menuBtnClick()" class="btn"><i class="fa-solid fa-bars text-light fa-2x"></i></button>Welcome To Admin Dashboard</h1>
-                <div>
-                    <button type="button" data-bs-toggle="dropdown" class="btn dropdown-toggle text-light"><i class="fa-solid fa-user"></i></button>
-                    <ul class="dropdown-menu text-center">
-                        <li><button (click)="logoutAdmin()" class="btn fw-bolder">Logout <i class="fa-solid fa-right-from-bracket"></i></button></li>
-                    </ul>
-                </div>
+  <!-- Main Content -->
+  <mat-sidenav-content>
+    <!-- Top Toolbar -->
+    <mat-toolbar class="top-toolbar border-bottom bg-white">
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="ms-2 fw-bold">Admin Dashboard</span>
+      
+      <span class="spacer"></span>
+      
+      <button mat-button [matMenuTriggerFor]="adminMenu" class="user-btn">
+        <mat-icon>account_circle</mat-icon>
+        <span class="ms-2">Admin</span>
+        <mat-icon>expand_more</mat-icon>
+      </button>
+      
+      <mat-menu #adminMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="logoutAdmin()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
 
-            </div>
+    <!-- Page Content -->
+    <div class="page-content p-4">
+      <div class="container-fluid">
+        <h1 class="welcome-title mb-4">Dashboard Overview</h1>
 
-         </div>
-         <!-- metrics -->
-          <div class="d-flex justify-content-evenly align-items-center my-5">
-            <!-- users -->
-             <div class="d-flex align-items-center p-3 rounded text-light bg-info">
-                <i class="fa-solid fa-users fa-3x me-3"></i>
+        <!-- Metrics Grid -->
+        <div class="row g-4 mb-5">
+          <!-- Users -->
+          <div class="col-xl-3 col-md-6">
+            <mat-card class="metric-card bg-info-gradient text-white">
+              <mat-card-content class="d-flex align-items-center justify-content-between p-4">
                 <div>
-                    <h3>Users</h3>
-                    <h2>{{userCount}}</h2>
+                  <p class="metric-label mb-1">Total Users</p>
+                  <h2 class="metric-value mb-0">{{userCount}}</h2>
                 </div>
-             </div>
-             <!-- recipes -->
-             <div class="d-flex align-items-center p-3 rounded text-light bg-danger">
-                <i class="fa-solid fa-bowl-food fa-3x me-3"></i>
-                <div>
-                    <h3>Recipes</h3>
-                    <h2>{{recipeCount}}</h2>
+                <div class="metric-icon-bg">
+                  <mat-icon>group</mat-icon>
                 </div>
-             </div>
-              <!-- downloads -->
-              <div class="d-flex align-items-center p-3 rounded text-light bg-primary">
-                <i class="fa-solid fa-download fa-3x me-3"></i>
-                <div>
-                    <h3>Downloads</h3>
-                    <h2>{{downloadCount}}</h2>
-                </div>
-             </div>
-             <!-- Notifications -->
-             <div class="d-flex align-items-center p-3 rounded text-light bg-success">
-                <i class="fa-solid fa-message fa-3x me-3"></i>
-                <div>
-                    <h3>Notifications</h3>
-                    <h2>you have <a style="text-decoration: none; color:red;" routerLink="/admin/request-list">{{requestCount}}</a> new requests</h2>
-                </div>
-             </div>
-
+              </mat-card-content>
+            </mat-card>
           </div>
 
-          <!-- Chart & calender -->
-           <div class="row">
-            <div class="col-lg-8">
-                <!-- chart -->
+          <!-- Recipes -->
+          <div class="col-xl-3 col-md-6">
+            <mat-card class="metric-card bg-danger-gradient text-white">
+              <mat-card-content class="d-flex align-items-center justify-content-between p-4">
+                <div>
+                  <p class="metric-label mb-1">Recipes</p>
+                  <h2 class="metric-value mb-0">{{recipeCount}}</h2>
+                </div>
+                <div class="metric-icon-bg">
+                  <mat-icon>restaurant_menu</mat-icon>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- Downloads -->
+          <div class="col-xl-3 col-md-6">
+            <mat-card class="metric-card bg-primary-gradient text-white">
+              <mat-card-content class="d-flex align-items-center justify-content-between p-4">
+                <div>
+                  <p class="metric-label mb-1">Downloads</p>
+                  <h2 class="metric-value mb-0">{{downloadCount}}</h2>
+                </div>
+                <div class="metric-icon-bg">
+                  <mat-icon>cloud_download</mat-icon>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <!-- Requests -->
+          <div class="col-xl-3 col-md-6">
+            <mat-card class="metric-card bg-success-gradient text-white clickable" routerLink="/admin/request-list">
+              <mat-card-content class="d-flex align-items-center justify-content-between p-4">
+                <div>
+                  <p class="metric-label mb-1">Pending Requests</p>
+                  <h2 class="metric-value mb-0">{{requestCount}}</h2>
+                </div>
+                <div class="metric-icon-bg">
+                  <mat-icon>notifications</mat-icon>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+
+        <!-- Charts & Calendar -->
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <mat-card class="p-4 shadow-sm border-0 h-100">
+              <mat-card-header class="mb-4">
+                <mat-card-title class="fw-bold">Cuisine Analytics</mat-card-title>
+                <mat-card-subtitle>Download distribution by cuisine type</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
                 <highcharts-chart 
-                [Highcharts]="Highcharts"
-                [options]="chartOptions"
-              
-                style="width: 100%; height: 400px; display: block;"
-              ></highcharts-chart>
-            </div>
-            <div class="col-lg-4">
-                <!-- calender -->
-                <mat-card class="demo-inline-calendar-card">
-                    <mat-calendar [(selected)]="selected"></mat-calendar>
-
-                </mat-card>
-
-            </div>
-
-           </div>
-
+                  [Highcharts]="Highcharts"
+                  [options]="chartOptions"
+                  style="width: 100%; height: 400px; display: block;"
+                ></highcharts-chart>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          
+          <div class="col-lg-4">
+            <mat-card class="p-0 shadow-sm border-0 h-100 overflow-hidden">
+              <mat-calendar [(selected)]="selected" class="w-100 custom-calendar"></mat-calendar>
+            </mat-card>
+          </div>
+        </div>
+      </div>
     </div>
-
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

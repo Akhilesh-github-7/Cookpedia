@@ -1,0 +1,52 @@
+.sidebar-container {
+  height: 100dvh;
+  background-color: #1b5e20;
+  color: white;
+  padding: 20px 0;
+}
+
+.brand-section {
+  padding: 0 20px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffc107;
+}
+
+.brand-icon {
+  font-size: 28px;
+  height: 28px;
+  width: 28px;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.mat-mdc-nav-list .mat-mdc-list-item {
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin: 4px 12px;
+  border-radius: 8px;
+  height: 48px !important;
+}
+
+.mat-mdc-nav-list .mat-mdc-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.active-item {
+  background-color: #ffc107 !important;
+  color: #1b5e20 !important;
+  font-weight: 600 !important;
+}
+
+.active-item mat-icon {
+  color: #1b5e20 !important;
+}
+
+mat-divider {
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}

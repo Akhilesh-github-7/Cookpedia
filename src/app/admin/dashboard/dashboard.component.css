@@ -1,0 +1,85 @@
+.dashboard-container {
+  height: 100dvh;
+}
+
+.admin-sidenav {
+  width: 260px;
+  background-color: #1b5e20;
+}
+
+.top-toolbar {
+  height: 64px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.welcome-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #1b5e20;
+}
+
+/* Metric Cards with Gradients */
+.metric-card {
+  border-radius: 16px;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-5px);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.bg-info-gradient { background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%); }
+.bg-danger-gradient { background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%); }
+.bg-primary-gradient { background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); }
+.bg-success-gradient { background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); }
+
+.metric-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.metric-value {
+  font-weight: 800;
+  font-size: 2.2rem;
+}
+
+.metric-icon-bg {
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-icon-bg mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+/* Calendar styling */
+::ng-deep .custom-calendar {
+  width: 100% !important;
+}
+
+::ng-deep .mat-calendar-body-selected {
+  background-color: #2e7d32 !important;
+}
+
+@media (max-width: 768px) {
+  .admin-sidenav {
+    width: 100%;
+  }
+}

@@ -1,13 +1,20 @@
 .recipes-container {
   background-color: #f8f9fa;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
-/* Sidebar Styles */
+/* Sidebar / Drawer Styles */
+.filter-drawer {
+  width: 280px;
+  background-color: white;
+  border-right: 1px solid rgba(0,0,0,0.12);
+}
+
 .filter-card {
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
   border: none;
+  box-shadow: none !important;
 }
 
 .filter-title {
@@ -153,8 +160,5 @@
 
 /* Responsive Adjustments */
 @media (max-width: 991px) {
-  .filter-card {
-    position: static !important;
-    margin-bottom: 20px;
-  }
+  /* No special adjustments needed for the drawer as it handles itself */
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -7,22 +7,21 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css'
 })
-export class UsersListComponent {
+export class UsersListComponent implements OnInit {
 
-  allUsers:any = []
+  allUsers: any = []
+  searchKey: string = ""
+  p: number = 1
 
-  constructor(private api:ApiService){}
+  constructor(private api: ApiService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getAllUsers()
   }
 
-  getAllUsers(){
-    this.api.allUsersApi().subscribe((res:any)=>{
+  getAllUsers() {
+    this.api.allUsersApi().subscribe((res: any) => {
       this.allUsers = res
-      console.log(this.allUsers);
-      
     })
   }
-
 }

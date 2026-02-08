@@ -1,0 +1,51 @@
+.admin-container {
+  height: 100dvh;
+}
+
+.admin-sidenav {
+  width: 260px;
+  background-color: #1b5e20;
+}
+
+.top-toolbar {
+  height: 64px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 350px;
+}
+
+.table > :not(caption) > * > * {
+  padding: 1rem 0.5rem;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(46, 125, 50, 0.02);
+}
+
+.badge {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Pagination Customization */
+::ng-deep .ngx-pagination {
+  padding-left: 0;
+}
+
+::ng-deep .ngx-pagination .current {
+  background: #2e7d32 !important;
+  border-radius: 50%;
+}
+
+::ng-deep .ngx-pagination a {
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+@media (max-width: 991px) {
+  .admin-sidenav {
+    display: none;
+  }
+}

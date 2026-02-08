@@ -1,0 +1,67 @@
+.admin-container {
+  height: 100dvh;
+}
+
+.admin-sidenav {
+  width: 260px;
+  background-color: #1b5e20;
+}
+
+.top-toolbar {
+  height: 64px;
+}
+
+.preview-img-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 4px solid white;
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-card {
+  border-radius: 20px;
+}
+
+.submit-btn {
+  background-color: #2e7d32 !important;
+  height: 48px;
+  font-weight: 600;
+}
+
+.mat-mdc-mini-fab {
+  box-shadow: none !important;
+}
+
+.instruction-list .mat-mdc-icon-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.meal-checkbox-wrapper {
+  min-width: 120px;
+}
+
+::ng-deep .mat-mdc-chip {
+  --mdc-chip-container-color: #e8f5e9;
+  --mdc-chip-label-text-color: #2e7d32;
+}
+
+@media (max-width: 991px) {
+  .admin-sidenav {
+    display: none;
+  }
+}

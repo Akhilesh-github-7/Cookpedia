@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { SearchPipe } from '../pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-recipes',
@@ -33,12 +35,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatExpansionModule,
     MatListModule,
     MatChipsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule
   ],
   templateUrl: './recipes.component.html',
   styleUrl: './recipes.component.css'
 })
-export class RecipesComponent {
+export class RecipesComponent implements OnInit {
+  @ViewChild('sidenav') sidenav!: MatSidenav;
   p: number = 1;
   searchKey: string = "";
   allRecipes: any = [];
@@ -46,8 +50,18 @@ export class RecipesComponent {
   mealTypeArray: any = [];
   dummyAllRecipes: any = [];
   activeFilter: string = 'All';
+  isMobile: boolean = false;
 
-  constructor(private api: ApiService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(
+    private api: ApiService, 
+    private router: Router, 
+    private snackBar: MatSnackBar,
+    private breakpointObserver: BreakpointObserver
+  ) { 
+    this.breakpointObserver.observe([Breakpoints.Handset]).subscribe(result => {
+      this.isMobile = result.matches;
+    });
+  }
 
   ngOnInit() {
     this.getAllRecipes();
@@ -74,11 +88,17 @@ export class RecipesComponent {
   filterAllRecipes(key: string, value: string) {
     this.allRecipes = this.dummyAllRecipes.filter((item: any) => item[key].includes(value));
     this.activeFilter = value;
-    this.p = 1; // Reset to first page on filter
+    this.p = 1; 
+    if (this.isMobile) {
+      this.sidenav.close();
+    }
   }
   
   resetFilter() {
     this.getAllRecipes();
+    if (this.isMobile) {
+      this.sidenav.close();
+    }
   }
 
   viewRecipe(recipeId: string) {

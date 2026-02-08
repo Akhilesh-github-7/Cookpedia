@@ -1,45 +1,82 @@
-<div class="row w-100">
-    <div class="col-lg-2 bg-success">
-        <app-sidebar></app-sidebar>
+<mat-sidenav-container class="admin-container">
+  <mat-sidenav mode="side" [opened]="true" class="admin-sidenav shadow">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
 
-    </div>
-    <div class="col-lg-10">
-       <h1 class="text-center text-warning my-4">All Recipe List</h1>
-       <div class="d-flex justify-content-between">
-        <button routerLink="/admin/recipe/add" class="btn btn-primary">+ Add New Recipe</button>
-        <input [(ngModel)]="searchRecipe" type="text" placeholder="Search recipe by Name" class="form-control w-25">
-       </div>
-       <table class="table my-5 shadow">
-        <thead>
-            <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Image</td>
-                <td>Cusisine</td>
-                <td>...</td>
-            </tr>
-        </thead>
-        <tbody>
-            @for (recipe of allRecipes | search:searchRecipe; track $index; let i =$index) {
-                <tr>
-                    <td>{{i+1}}</td>
-                    <td>{{recipe.name}}</td>
-                    <td><img width="70px" height="70px" [src]="recipe.image" alt=""></td>
-                    <td>{{recipe.cuisine}}</td>
-                    <td><button routerLink="/admin/recipe/{{recipe._id}}/edit" class="btn me-1"><i class="fa-solid fa-edit text-primary"></i></button>
-                    <button (click)="deleteRecipe(recipe._id)" class="btn me-1"><i class="fa-solid fa-trash text-danger"></i></button>
-                </td>
+  <mat-sidenav-content>
+    <!-- Top Toolbar -->
+    <mat-toolbar class="top-toolbar border-bottom bg-white">
+      <span class="ms-2 fw-bold">Manage Recipes</span>
+      <span class="spacer"></span>
+      <button mat-raised-button color="primary" routerLink="/admin/recipe/add">
+        <mat-icon>add</mat-icon> Add New Recipe
+      </button>
+    </mat-toolbar>
+
+    <div class="page-content p-4">
+      <mat-card class="shadow-sm border-0">
+        <mat-card-header class="mb-3 d-flex justify-content-between align-items-center">
+          <mat-card-title class="fw-bold">All Recipe List</mat-card-title>
+          
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Search recipes...</mat-label>
+            <input matInput [(ngModel)]="searchRecipe" placeholder="Ex. Italian, Pasta">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead>
+                <tr class="table-light">
+                  <th class="ps-3">#</th>
+                  <th>Recipe Name</th>
+                  <th>Image</th>
+                  <th>Cuisine</th>
+                  <th class="text-center">Actions</th>
                 </tr>
-            }
-            @if ((allRecipes | search:searchRecipe).length==0 ){
-                <tr class="text-danger fw-bolder fs-3">
-                    Recipes Not Found!!
-                </tr>
-            }
-        </tbody>
+              </thead>
+              <tbody>
+                @for (recipe of allRecipes | search:searchRecipe | paginate: { itemsPerPage: 10, currentPage: p }; track $index; let i =$index) {
+                  <tr>
+                    <td class="ps-3 fw-bold">{{ (p - 1) * 10 + i + 1 }}</td>
+                    <td class="fw-medium">{{recipe.name}}</td>
+                    <td>
+                      <img width="60px" height="60px" [src]="recipe.image" [alt]="recipe.name" class="rounded shadow-sm recipe-thumb">
+                    </td>
+                    <td><span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2">{{recipe.cuisine}}</span></td>
+                    <td class="text-center">
+                      <div class="d-flex justify-content-center gap-2">
+                        <button mat-icon-button color="primary" [routerLink]="['/admin/recipe', recipe._id, 'edit']" matTooltip="Edit recipe">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="deleteRecipe(recipe._id)" matTooltip="Delete recipe">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                }
+                
+                @if ((allRecipes | search:searchRecipe).length === 0) {
+                  <tr>
+                    <td colspan="5" class="text-center py-5">
+                      <mat-icon class="display-4 text-muted mb-3">sentiment_dissatisfied</mat-icon>
+                      <h3 class="text-muted">No Recipes Found</h3>
+                      <p class="text-muted mb-0">Try adjusting your search terms.</p>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
 
-       </table>
-
+          <div class="pagination-container d-flex justify-content-center mt-4">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
-
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
