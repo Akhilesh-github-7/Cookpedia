@@ -1,0 +1,96 @@
+.about-page {
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.about-hero {
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-img {
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  animation: pulse 4s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.cta-btn {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+}
+
+/* Mission & Vision Cards */
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-success-light {
+  background-color: #e8f5e9;
+}
+
+.bg-primary-light {
+  background-color: #e3f2fd;
+}
+
+.mission-vision mat-card {
+  transition: transform 0.3s ease;
+}
+
+.mission-vision mat-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Why Us Section */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #1b5e20;
+  font-size: 2.5rem;
+}
+
+.chef-img {
+  max-height: 500px;
+}
+
+.stats-badge {
+  z-index: 10;
+  min-width: 120px;
+  text-align: center;
+}
+
+/* Material List Overrides */
+.mat-mdc-list-item {
+  height: auto !important;
+  padding: 15px 0 !important;
+}
+
+.text-warning {
+  color: #ffc107 !important;
+}
+
+@media (max-width: 991px) {
+  .hero-img {
+    margin-top: 40px;
+    max-width: 300px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+}

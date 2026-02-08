@@ -1,38 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
 import { RouterLink } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-saved-recipe',
-  imports: [HeaderComponent,FooterComponent,RouterLink],
+  standalone: true,
+  imports: [
+    RouterLink, 
+    MatSnackBarModule, 
+    CommonModule, 
+    MatCardModule, 
+    MatButtonModule, 
+    MatIconModule, 
+    MatTooltipModule
+  ],
   templateUrl: './saved-recipe.component.html',
   styleUrl: './saved-recipe.component.css'
 })
-export class SavedRecipeComponent {
+export class SavedRecipeComponent implements OnInit {
 
-  // create a property to store array of saved recipes
-  allrecipes:any=[]
-  // api service dependency injection
-  constructor(private api:ApiService){}
-  // call the function inside ngOnInit()
-  ngOnInit(){
+  allrecipes: any = []
+
+  constructor(private api: ApiService, private snackBar: MatSnackBar) { }
+
+  ngOnInit() {
     this.getAllSavedRecipes()
   }
-  // define function to call api
-  getAllSavedRecipes(){
-    this.api.getUserSavedRecipeApi().subscribe((res:any)=>{
-      this.allrecipes=res
-      console.log(this.allrecipes);
-      
+
+  getAllSavedRecipes() {
+    this.api.getUserSavedRecipeApi().subscribe((res: any) => {
+      this.allrecipes = res
     })
   }
 
-  // delete saved recipe
-  removeSavedRecipe(id:string){
-    this.api.deleteSavedRecipeApi(id).subscribe((res:any)=>{
-    this.getAllSavedRecipes()
+  removeSavedRecipe(id: string) {
+    this.api.deleteSavedRecipeApi(id).subscribe((res: any) => {
+      this.snackBar.open("Recipe removed successfully", "Close", { duration: 3000 });
+      this.getAllSavedRecipes()
     })
   }
 

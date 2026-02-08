@@ -1,0 +1,147 @@
+.recipe-view-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.recipe-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #1b5e20;
+  font-size: 2.8rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: #2e7d32;
+  border-bottom: 2px solid #e8f5e9;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* Image & Action Styles */
+.recipe-image-card {
+  border-radius: 20px;
+  overflow: hidden;
+  border: none;
+}
+
+.main-recipe-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.recipe-image-card:hover .main-recipe-img {
+  transform: scale(1.03);
+}
+
+.action-btn {
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Stats Container */
+.stats-container {
+  border: 1px solid #e8f5e9;
+}
+
+.stat-icon-bg {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+}
+
+.stat-icon-bg.prep { background-color: #e3f2fd; color: #1976d2; }
+.stat-icon-bg.cook { background-color: #fff3e0; color: #f57c00; }
+.stat-icon-bg.calories { background-color: #ffebee; color: #d32f2f; }
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-weight: 700;
+  color: #333;
+}
+
+/* Ingredients List */
+.ingredients-list .mat-mdc-list-item {
+  height: auto !important;
+  padding: 8px 0 !important;
+}
+
+/* Instructions Stepper */
+.instruction-step {
+  position: relative;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background-color: #2e7d32;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.step-content {
+  padding-top: 4px;
+  line-height: 1.6;
+}
+
+/* Related Recipes */
+.related-recipe-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.related-recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1) !important;
+}
+
+.related-img {
+  height: 120px;
+  object-fit: cover;
+}
+
+.related-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .recipe-title {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+  
+  .stats-container {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .stat-item {
+    min-width: 80px;
+  }
+}

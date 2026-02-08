@@ -1,0 +1,72 @@
+.header-toolbar {
+  background-color: #2e7d32 !important; /* Consistent with theme */
+  color: white !important;
+  height: 70px;
+  padding: 0;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  gap: 8px;
+}
+
+.brand-icon {
+  font-size: 32px;
+  height: 32px;
+  width: 32px;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav-links {
+  gap: 10px;
+}
+
+.nav-links a {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.active-link {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+}
+
+.user-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 0 16px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Material Menu Customization */
+::ng-deep .mat-mdc-menu-panel {
+  min-width: 200px !important;
+  margin-top: 8px;
+}
+
+::ng-deep .mat-mdc-menu-item {
+  font-family: 'Roboto', sans-serif !important;
+}

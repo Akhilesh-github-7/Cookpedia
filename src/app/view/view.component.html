@@ -1,102 +1,139 @@
-<app-header></app-header>
-
-<div class="container my-5">
-  <div class="row mb-5">
-    <div class="col-lg-6">
-      <a routerLink="/all-recipes" href="">Back To Recipe List</a>
-      <br />
-      <img class="img-fluid my-5" [src]="recipe.image" alt="" />
-      <div class="d-flex justify-content-between">
-        <button (click)="downloadRecipe()" class="btn btn-success">Download Recipe</button>
-        <button (click)="saveRecipe()" class="btn btn-primary">Save Recipe</button>
-      </div>
+<div class="recipe-view-container container py-5">
+  @if (recipe.name) {
+    <!-- Back Header -->
+    <div class="mb-4">
+      <button mat-button color="primary" routerLink="/all-recipes">
+        <mat-icon>arrow_back</mat-icon> Back to Recipes
+      </button>
     </div>
-    <div class="col-lg-6">
-      <h1>{{ recipe.name }}</h1>
-      <div class="d-flex justify-content-between my-5">
-        <p class="fw-bolder">Cuisine: {{ recipe.cuisine }}</p>
-        <p class="fw-bolder">Servings: {{ recipe.servings }}</p>
-        <p class="fw-bolder">Mode of cooking: {{ recipe.difficulty }}</p>
-      </div>
-      <div class="d-flex justify-content-evenly">
-        <div class="d-flex flex-column align-items-center">
-          <img
-            width="70px"
-            src="https://tse2.mm.bing.net/th?id=OIP.xy52jM0FuazKAQTfeyvo_gHaHa&pid=Api&P=0&h=180"
-            alt=""
-          />
-          <p class="fw-bolder">Prepration Time</p>
-          <h6>
-            <span class="text-danger fw-bolder">{{
-              recipe.prepTimeMinutes
-            }}</span
-            >Minutes
-          </h6>
-        </div>
-        <div class="d-flex flex-column align-items-center">
-          <img
-            width="70px"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD919LsoBCmFqbqKBZJ1Ark5NoDBK18gcZe_Z7faTeLPfC0W_Y9n4plZwam_BXUQyIboo&usqp=CAU"
-            alt=""
-          />
-          <p class="fw-bolder">Cooking Time</p>
-          <h6>
-            <span class="text-danger fw-bolder">{{recipe.cookTimeMinutes}}</span
-            >Minutes
-          </h6>
-        </div>
-        <div class="d-flex flex-column align-items-center">
-          <img
-            width="70px"
-            src="https://cdn1.iconfinder.com/data/icons/fitness-sport/512/calories-512.png"
-            alt=""
-          />
-          <p class="fw-bolder">Calorie per serving</p>
-          <h6>
-            <span class="text-danger fw-bolder">{{
-              recipe.caloriesPerServing
-            }}</span
-            >Calories
-          </h6>
-        </div>
-      </div>
-      <div class="my-4">
-        <h2>Ingredients Needed</h2>
-        <ol>
-          @for(item of recipe.ingredients; track $index){
-          <li>{{ item }}</li>
-          }
-        </ol>
-      </div>
-      <div class="my-4">
-        <h2>Cooking instructions</h2>
-        <ol>
-          @for(item of recipe.instructions; track $index){
-          <li>{{ item }}</li>
-          }
-        </ol>
-      </div>
-    </div>
-  </div>
-  <div class="mb-5">
-    <h1>Related Recipes</h1>
-    <div class="row my-3">
-      @if (allRelatedRecipes.length>0) { @for (item of allRelatedRecipes; track
-      $index) {
-      <div class="col-lg-2">
-        <div routerLink="/recipe/{{ item._id }}/view" class="p-3">
-          <img class="card-img-top" [src]="item.image" alt="" />
 
-          <div class="card-body">
-            <h5 class="card-title">{{ item.name }}</h5>
+    <div class="row g-5">
+      <!-- Left Column: Image & Actions -->
+      <div class="col-lg-5">
+        <mat-card class="recipe-image-card shadow-sm">
+          <img mat-card-image [src]="recipe.image" [alt]="recipe.name" class="main-recipe-img">
+        </mat-card>
+        
+        <div class="action-buttons mt-4 d-flex gap-3">
+          <button mat-raised-button color="primary" class="flex-grow-1 action-btn py-2" (click)="downloadRecipe()">
+            <mat-icon>download</mat-icon> Download PDF
+          </button>
+          <button mat-stroked-button color="accent" class="flex-grow-1 action-btn py-2" (click)="saveRecipe()">
+            <mat-icon>favorite_border</mat-icon> Save to Collection
+          </button>
+        </div>
+
+        <!-- Quick Info Chips -->
+        <div class="quick-info mt-4">
+          <mat-chip-set>
+            <mat-chip highlighted color="primary">
+              <mat-icon matChipAvatar>restaurant</mat-icon>
+              {{recipe.cuisine}}
+            </mat-chip>
+            <mat-chip>
+              <mat-icon matChipAvatar>group</mat-icon>
+              Serves {{recipe.servings}}
+            </mat-chip>
+            <mat-chip>
+              <mat-icon matChipAvatar>equalizer</mat-icon>
+              {{recipe.difficulty}}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+      </div>
+
+      <!-- Right Column: Details -->
+      <div class="col-lg-7">
+        <h1 class="recipe-title mb-4">{{ recipe.name }}</h1>
+        
+        <!-- Stats Row -->
+        <div class="stats-container p-4 rounded-4 bg-white shadow-sm mb-5 d-flex justify-content-around text-center">
+          <div class="stat-item">
+            <div class="stat-icon-bg prep">
+              <mat-icon>timer</mat-icon>
+            </div>
+            <p class="stat-label mb-0">Prep Time</p>
+            <h5 class="stat-value">{{recipe.prepTimeMinutes}} min</h5>
+          </div>
+          <mat-divider vertical></mat-divider>
+          <div class="stat-item">
+            <div class="stat-icon-bg cook">
+              <mat-icon>outdoor_grill</mat-icon>
+            </div>
+            <p class="stat-label mb-0">Cook Time</p>
+            <h5 class="stat-value">{{recipe.cookTimeMinutes}} min</h5>
+          </div>
+          <mat-divider vertical></mat-divider>
+          <div class="stat-item">
+            <div class="stat-icon-bg calories">
+              <mat-icon>local_fire_department</mat-icon>
+            </div>
+            <p class="stat-label mb-0">Calories</p>
+            <h5 class="stat-value">{{recipe.caloriesPerServing}} kcal</h5>
+          </div>
+        </div>
+
+        <!-- Ingredients -->
+        <div class="details-section mb-5">
+          <h2 class="section-title">
+            <mat-icon class="me-2">shopping_basket</mat-icon> Ingredients Needed
+          </h2>
+          <mat-list class="ingredients-list">
+            @for(item of recipe.ingredients; track $index) {
+              <mat-list-item>
+                <mat-icon matListItemIcon class="text-success">check_circle_outline</mat-icon>
+                <span matListItemTitle>{{ item }}</span>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            }
+          </mat-list>
+        </div>
+
+        <!-- Instructions -->
+        <div class="details-section">
+          <h2 class="section-title">
+            <mat-icon class="me-2">menu_book</mat-icon> Cooking Instructions
+          </h2>
+          <div class="instructions-stepper">
+            @for(step of recipe.instructions; track $index) {
+              <div class="instruction-step d-flex gap-3 mb-4">
+                <div class="step-number">{{$index + 1}}</div>
+                <div class="step-content">
+                  <p class="mb-0">{{ step }}</p>
+                </div>
+              </div>
+            }
           </div>
         </div>
       </div>
-      } }@else {
-      <h3 class="text-danger">No related recipes found!</h3>
-      }
     </div>
-  </div>
 
-  <app-footer></app-footer>
+    <!-- Related Recipes -->
+    <div class="related-section mt-5 pt-5">
+      <h2 class="section-title mb-4">Related Recipes</h2>
+      <div class="row g-4">
+        @if (allRelatedRecipes.length > 0) {
+          @for (item of allRelatedRecipes; track $index) {
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <mat-card class="related-recipe-card h-100 shadow-sm" [routerLink]="['/recipe', item._id, 'view']">
+                <img mat-card-image [src]="item.image" [alt]="item.name" class="related-img">
+                <mat-card-content class="p-2">
+                  <h6 class="related-title text-truncate" [title]="item.name">{{ item.name }}</h6>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          }
+        } @else {
+          <div class="col-12">
+            <p class="text-muted italic">No related recipes found for this cuisine.</p>
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="text-center py-5">
+      <mat-spinner diameter="50" class="mx-auto mb-3"></mat-spinner>
+      <p>Loading recipe details...</p>
+    </div>
+  }
 </div>

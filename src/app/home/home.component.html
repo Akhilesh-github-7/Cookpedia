@@ -1,119 +1,189 @@
-<app-header></app-header>
-<div class="container">
-  <div class="row p-5 bg-success">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-4 text-light">
-      <h1>
-        The Easiest way <br />
-        To make yor <br />Favorite Meal
-      </h1>
-      <p style="text-align: justify">
-        Discover 100+ recipes in your hand with the best recipe.Help you to find
-        the easiest way to cook.
-      </p>
-      <a
-        routerLink="/all-recipes"
-        style="background-color: green"
-        class="btn text-light"
-        >Explore Recipes</a
-      >
-    </div>
-    <div class="col-lg-6">
-      <img
-        class="w-50 landingImg"
-        style="margin-left: 150px"
-        src="https://www.pngall.com/wp-content/uploads/2/Healthy-Meal.png"
-        alt="landingImg"
-      />
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-lg-6 text-content">
+        <h1 class="display-4 fw-bold mb-4">
+          The Easiest Way To Make Your <span class="text-accent">Favorite Meal</span>
+        </h1>
+        <p class="lead mb-4">
+          Discover 100+ recipes in your hand with the best guidance. 
+          We help you find the easiest way to cook healthy and delicious meals.
+        </p>
+        <button mat-raised-button color="primary" routerLink="/all-recipes" class="cta-button">
+          Explore Recipes <mat-icon iconPositionEnd>restaurant_menu</mat-icon>
+        </button>
+      </div>
+      <div class="col-lg-6 image-content text-center d-none d-lg-block">
+        <img src="https://www.pngall.com/wp-content/uploads/2/Healthy-Meal.png" alt="Healthy Meal" class="img-fluid hero-img floating-animation">
+      </div>
     </div>
   </div>
-  <!-- Popular recipes -->
-  <div class="my-5 p-5">
-    <h1>Popular Recipes of the week</h1>
-    <div class="d-flex justify-content-between">
-      <p>Our Most popular recipes of the week</p>
-      <a routerLink="/all-recipes">View All</a>
-    </div>
-    <div class="row my-3">
-      @for (recipe of allRecipes; track $index){
-      <!-- each recipe -->
-      <div class="col-lg-4">
-        <div class="p-3">
-          <img class="card-img-top" [src]="recipe.image" alt="" />
+</section>
 
-          <div class="card-body">
-            <h5 class="card-title">{{ recipe.name }}</h5>
-          </div>
-        </div>
+<!-- Popular Recipes Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+      <div>
+        <h2 class="section-title">Popular Recipes</h2>
+        <p class="text-muted">Our most popular recipes of the week</p>
       </div>
+      <button mat-stroked-button color="primary" routerLink="/all-recipes">View All</button>
+    </div>
+    
+    <div class="row g-4">
+      @for (recipe of allRecipes; track $index) {
+        <div class="col-lg-4 col-md-6">
+          <mat-card class="recipe-card h-100">
+            <img mat-card-image [src]="recipe.image" [alt]="recipe.name" class="recipe-img">
+            <mat-card-content class="pt-3">
+              <h3 class="card-title">{{ recipe.name }}</h3>
+              <p class="card-text text-muted text-truncate">{{ recipe.instructions || 'Delicious homemade recipe.' }}</p>
+            </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-button color="primary" [routerLink]="['/recipe', recipe._id, 'view']">VIEW RECIPE</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
       }
     </div>
   </div>
-  <!-- banner -->
-  <div
-    style="
-      height: 400px;
-      background-image: url('https://t3.ftcdn.net/jpg/03/60/57/68/360_F_360576850_05QKW3mPD8b0fN545hteX0nA3sDEHt4.jpg');
-      background-size: cover;
-    "
-    class="row align-items-center my-5"
-  >
-    <div class="col-lg-6"></div>
-    <div class="col-lg-6">
-      <div class="bg-light rounded p-5 w-75">
-        <h3>50+ Recipe that very quick and fast</h3>
-        <p class="text-secondary mt-3">
-          Find the perfect food ideas to start your day with the quick and
-          easiest way.
-        </p>
+</section>
+
+<!-- Promo Banner Section -->
+<section class="promo-banner my-5">
+  <div class="container">
+    <div class="banner-content rounded-4 p-5">
+      <div class="row align-items-center">
+        <div class="col-lg-6 offset-lg-6">
+          <div class="bg-white bg-opacity-90 rounded-3 p-4 shadow-sm">
+            <h3 class="fw-bold text-success mb-3">50+ Recipes that are Quick & Fast</h3>
+            <p class="text-secondary mb-0">
+              Find the perfect food ideas to start your day with the quick and easiest way.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <!-- donload app -->
-  <div
-    style="height: 450px"
-    class="my-5 row align-items-center text-light bg-success rounded p-5"
-  >
-    <div class="col-lg-6">
-      <img
-        height="350px"
-        src="https://toppng.com/uploads/thumbnail/android-app-on-google-play-11568829115kt4gig8167.png"
-        alt=""
-      />
-    </div>
-    <div class="col-lg-6 text-center">
-      <h1>Download App</h1>
-      <h5 class="my-3">
-        Download the App from App Store or Google Play for a better experience
-      </h5>
-      <img
-        width="150px"
-        src="https://freepngimg.com/download/android/67006-app-play-google-android-store-free-clipart-hd.png"
-        alt=""
-      />
-      <img
-        width="150px"
-        src="https://benic360.com/wp-content/uploads/2020/06/apple-store-icon-png-8.png"
-        alt=""
-      />
-    </div>
-  </div>
-  <!-- testimony -->
-  <div class="text-center my-5">
-    <h1>Client Testimonials</h1>
-    <marquee>  
-        <div class="d-flex my-5">
-          <!-- testimony -->
-          @for (item of allFeedbackList; track $index) {
-          <div class="rounded border w-100 p-3 me-2">
-            <h5>{{item.name}}</h5>
-            <p style="white-space: normal; width: 100%; text-align: justify">
-              {{item.message}}
-            </p>
-          </div>
-        }
+</section>
+
+<!-- Download App Section -->
+<section class="download-section py-5 my-5 mx-lg-3 rounded-4 overflow-hidden position-relative">
+  <div class="container position-relative" style="z-index: 2;">
+    <div class="row align-items-center">
+      <!-- App Mockup -->
+      <div class="col-lg-5 text-center mb-5 mb-lg-0">
+        <div class="app-mockup-container">
+          <img src="https://toppng.com/uploads/thumbnail/android-app-on-google-play-11568829115kt4gig8167.png" alt="App Preview" class="img-fluid app-preview shadow-lg">
+          <div class="floating-badge badge-1 shadow"><mat-icon>star</mat-icon> 4.9 Rating</div>
+          <div class="floating-badge badge-2 shadow"><mat-icon>download</mat-icon> 1M+ Downloads</div>
         </div>
-    </marquee>
+      </div>
+      
+      <!-- Content & Form -->
+      <div class="col-lg-7 text-center text-lg-start ps-lg-5">
+        <span class="badge bg-warning text-dark mb-3 px-3 py-2 fw-bold text-uppercase letter-spacing">Mobile Experience</span>
+        <h2 class="display-4 fw-bold mb-3 text-white">Your Kitchen, <span class="text-warning">Simplified.</span></h2>
+        <p class="lead mb-4 text-white-50">
+          Get the full Cookpedia experience on your phone. Access 1000+ recipes, create grocery lists, and cook offline with ease.
+        </p>
+
+        <!-- Feature List -->
+        <div class="row g-3 mb-5 text-white">
+          <div class="col-sm-4">
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-2">
+              <mat-icon class="text-warning">offline_bolt</mat-icon>
+              <span class="fw-medium">Offline Mode</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-2">
+              <mat-icon class="text-warning">notifications_active</mat-icon>
+              <span class="fw-medium">Smart Alerts</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-2">
+              <mat-icon class="text-warning">restaurant</mat-icon>
+              <span class="fw-medium">Meal Planner</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Store Badges -->
+        <div class="d-flex gap-3 justify-content-center justify-content-lg-start mb-5">
+          <img src="https://freepngimg.com/download/android/67006-app-play-google-android-store-free-clipart-hd.png" alt="Google Play" class="store-badge border border-white border-opacity-25 rounded-2">
+          <img src="https://benic360.com/wp-content/uploads/2020/06/apple-store-icon-png-8.png" alt="App Store" class="store-badge border border-white border-opacity-25 rounded-2">
+        </div>
+
+        <!-- Quick Link Form -->
+        <div class="link-form-container d-inline-block bg-white bg-opacity-10 p-2 rounded-3 border border-white border-opacity-10">
+          <div class="input-group">
+            <input type="text" class="form-control bg-transparent text-white border-0 shadow-none ps-3" placeholder="Enter phone number" style="min-width: 200px;">
+            <button class="btn btn-warning fw-bold px-4" type="button">Get App Link</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<app-footer></app-footer>
+  
+  <!-- Decorative Elements -->
+  <div class="bg-circle circle-1"></div>
+  <div class="bg-circle circle-2"></div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section py-5 position-relative">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill fw-bold text-uppercase mb-3">Testimonials</span>
+      <h2 class="display-5 fw-bold section-title">What Our Community <span class="text-success">Says</span></h2>
+      <p class="text-muted lead mx-auto" style="max-width: 600px;">
+        Join thousands of happy home cooks who have discovered the joy of cooking with Cookpedia.
+      </p>
+    </div>
+
+    <div class="scrolling-wrapper-flexbox pb-4">
+      @for (item of allFeedbackList; track $index) {
+        <div class="testimonial-card-wrapper">
+          <mat-card class="testimonial-card h-100 border-0 shadow-sm p-3">
+            <div class="quote-icon-bg">
+              <mat-icon>format_quote</mat-icon>
+            </div>
+            
+            <mat-card-content class="pt-4">
+              <div class="rating-stars mb-3">
+                <mat-icon class="star-icon">star</mat-icon>
+                <mat-icon class="star-icon">star</mat-icon>
+                <mat-icon class="star-icon">star</mat-icon>
+                <mat-icon class="star-icon">star</mat-icon>
+                <mat-icon class="star-icon">star</mat-icon>
+              </div>
+              <p class="testimonial-text fst-italic mb-4">"{{item.message}}"</p>
+            </mat-card-content>
+
+            <mat-card-header class="p-0">
+              <div mat-card-avatar class="testimonial-avatar shadow-sm">
+                <span class="avatar-initial">{{item.name.charAt(0)}}</span>
+              </div>
+              <mat-card-title class="fw-bold fs-6">{{item.name}}</mat-card-title>
+              <mat-card-subtitle class="small">Verified Cook</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      }
+    </div>
+
+    <div class="text-center mt-5">
+      <button mat-button color="primary" routerLink="/contact" class="fw-bold">
+        Share Your Experience <mat-icon>arrow_right_alt</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Decorative Background -->
+  <div class="testimonial-bg-blob"></div>
+</section>
+

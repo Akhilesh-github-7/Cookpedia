@@ -1,35 +1,58 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  standalone: true,
+  imports: [
+    RouterLink, 
+    RouterLinkActive, 
+    CommonModule, 
+    MatToolbarModule, 
+    MatButtonModule, 
+    MatIconModule, 
+    MatMenuModule,
+    MatDividerModule
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
-  isLoggedin:boolean = false
-  loginUser:string=""
-  constructor(private router:Router){
+export class HeaderComponent implements OnInit {
+  isLoggedin: boolean = false;
+  loginUser: string = "";
+  
+  constructor(private router: Router) {}
 
+  ngOnInit() {
+    this.checkLoginStatus();
   }
 
-  ngOnInit(){
-    if(sessionStorage.getItem('token') && sessionStorage.getItem('user')){
-      this.isLoggedin = true
-      this.loginUser = JSON.parse(sessionStorage.getItem('user') || "").username
-
-    }else{
-      this.isLoggedin = false
-      this.loginUser=""
+  checkLoginStatus() {
+    const user = sessionStorage.getItem('user');
+    const token = sessionStorage.getItem('token');
+    if (token && user) {
+      this.isLoggedin = true;
+      try {
+        this.loginUser = JSON.parse(user).username;
+      } catch (e) {
+        this.loginUser = "User";
+      }
+    } else {
+      this.isLoggedin = false;
+      this.loginUser = "";
     }
   }
 
-  logout(){
-    sessionStorage.clear()
-    this.isLoggedin = false
-    this.loginUser=""
-    this.router.navigateByUrl('/')
+  logout() {
+    sessionStorage.clear();
+    this.isLoggedin = false;
+    this.loginUser = "";
+    this.router.navigateByUrl('/login');
   }
-
 }

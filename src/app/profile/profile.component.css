@@ -1,0 +1,101 @@
+.profile-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* Profile Card */
+.profile-card {
+  border-radius: 20px;
+  background: white;
+  border: none;
+}
+
+.image-container {
+  width: 180px;
+  height: 180px;
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 4px;
+  border-color: #2e7d32 !important;
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.image-container:hover .upload-overlay {
+  opacity: 1;
+}
+
+/* Section Title */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #1b5e20;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Recipe Cards */
+.recipe-card {
+  border-radius: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+}
+
+.card-img-wrapper {
+  height: 160px;
+}
+
+.recipe-img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.recipe-card:hover .recipe-img {
+  transform: scale(1.05);
+}
+
+.card-title {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Badge */
+.bg-success-subtle {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+/* Empty State */
+.empty-state {
+  border: 2px dashed #e0e0e0;
+}
+
+@media (max-width: 991px) {
+  .profile-card {
+    position: static !important;
+    margin-bottom: 20px;
+  }
+}

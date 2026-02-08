@@ -1,1 +1,5 @@
-<router-outlet></router-outlet>
+<app-header *ngIf="showHeadFoot"></app-header>
+<main class="min-vh-100">
+    <router-outlet></router-outlet>
+</main>
+<app-footer *ngIf="showHeadFoot"></app-footer>

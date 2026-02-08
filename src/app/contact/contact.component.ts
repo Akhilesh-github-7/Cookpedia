@@ -1,18 +1,33 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-contact',
-  imports: [HeaderComponent,FooterComponent,ReactiveFormsModule],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule, 
+    MatSnackBarModule, 
+    CommonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule
+  ],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
   testimonyForm:FormGroup
-  constructor(private fb:FormBuilder,private api:ApiService){
+  constructor(private fb:FormBuilder,private api:ApiService, private snackBar: MatSnackBar){
     this.testimonyForm = this.fb.group({
       name:["",[Validators.required,Validators.pattern("[a-zA-Z ]*")]],
       email:["",[Validators.required,Validators.email]],
@@ -27,12 +42,12 @@ export class ContactComponent {
       const message = this.testimonyForm.value.message
       // alert(`${name},${email},${message}`)
       this.api.addTestimonyAPI({name,email,message}).subscribe((res:any)=>{
-        alert("Thank you for your valuable testimony!!!")
+        this.snackBar.open("Thank you for your valuable testimony!!!", "Close", { duration: 3000 });
         this.testimonyForm.reset()
       })
 
     }else{
-      alert("Invalid Form")
+      this.snackBar.open("Invalid Form", "Close", { duration: 3000 });
     }
   }
 

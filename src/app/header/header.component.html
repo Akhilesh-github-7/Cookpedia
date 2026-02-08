@@ -1,43 +1,55 @@
-<nav class="navbar container navbar-expand-lg bg-success mt-5">
-    <div class="container">
-      <a class="navbar-brand text-light fw-bolder" href="#"><i class="fa-solid fa-graduation-cap"></i>Cookpedia</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" routerLink="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" routerLink="/all-recipes">Recipes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" routerLink="/about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" routerLink="/contact">Contact</a>
-          </li>
-        </ul>
-        <div class="ms-auto dropdown">
-            <button class="btn dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-user"></i>
-              @if (isLoggedin) {
-                <span class="fw-bolder">Hi, {{loginUser}}</span>
-              }
-            </button>
-            <ul class="dropdown-menu">
-              @if (isLoggedin) {
-                <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-                <li><a class="dropdown-item" routerLink="/save-recipe">Recipe Collection</a></li>
-                <li><button (click)="logout()" class="dropdown-item">Logout<i class="fa-solid fa-right-from-bracket ms-1"></i></button></li>
-
-              }@else {
-                <li><a class="dropdown-item" routerLink="/login">Login</a></li>
-              <li><a class="dropdown-item" routerLink="/register">Register</a></li>
-              }
-            </ul>
-          </div>
-      </div>
+<mat-toolbar color="primary" class="header-toolbar shadow-sm sticky-top">
+  <div class="container d-flex align-items-center justify-content-between">
+    <div class="brand-section">
+      <a routerLink="/" class="brand-link">
+        <mat-icon class="brand-icon">school</mat-icon>
+        <span class="brand-name">Cookpedia</span>
+      </a>
     </div>
-  </nav>
+
+    <div class="nav-links d-none d-md-flex align-items-center">
+      <a mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a mat-button routerLink="/all-recipes" routerLinkActive="active-link">Recipes</a>
+      <a mat-button routerLink="/about" routerLinkActive="active-link">About</a>
+      <a mat-button routerLink="/contact" routerLinkActive="active-link">Contact</a>
+    </div>
+
+    <div class="user-section">
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
+        <mat-icon>account_circle</mat-icon>
+        <span class="ms-1 d-none d-sm-inline" *ngIf="isLoggedin">Hi, {{loginUser}}</span>
+        <span class="ms-1 d-none d-sm-inline" *ngIf="!isLoggedin">Account</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      
+      <mat-menu #userMenu="matMenu" xPosition="before">
+        <ng-container *ngIf="isLoggedin; else guestMenu">
+          <button mat-menu-item routerLink="/profile">
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item routerLink="/save-recipe">
+            <mat-icon>favorite</mat-icon>
+            <span>Recipe Collection</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </ng-container>
+        
+        <ng-template #guestMenu>
+          <button mat-menu-item routerLink="/login">
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+          </button>
+          <button mat-menu-item routerLink="/register">
+            <mat-icon>person_add</mat-icon>
+            <span>Register</span>
+          </button>
+        </ng-template>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>
